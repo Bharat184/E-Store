@@ -28,7 +28,7 @@ const product=require("./Models/Product");
 const user=require("./Models/User");
 
 //store session in mongodb
-let uri=`mongodb+srv://${dotenv.MONGO_USER}:${dotenv.MONGO_PASSWORD}@cluster0.z0rzwg9.mongodb.net/${dotenv.MONGO_DEFAULT_DATABASE}`;
+let uri=`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.z0rzwg9.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 const store = new MongoDBStore({
    uri,
    collection: 'sessions'
@@ -139,7 +139,7 @@ app.use((error,req,res,next)=>{
    return res.status(500).render("500",{title:"Error",link:'/error',isAuthenticated:req.session.isLoggedIn});
 });
 
-mongoose.connect(`mongodb+srv://${dotenv.MONGO_USER}:${dotenv.MONGO_PASSWORD}@cluster0.z0rzwg9.mongodb.net/${dotenv.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`).then(()=>{}).catch((err)=>{
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.z0rzwg9.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`).then(()=>{}).catch((err)=>{
    console.log("error is: "+err);
 });
 

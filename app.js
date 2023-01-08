@@ -64,7 +64,8 @@ const fileFilter=(req,file,cb)=>{
 
 //Set templating engine.
 app.set("view engine","ejs"); //set view engine.
-app.set("views","views"); //set view folder.
+app.set("views",path.join(__dirname,"Views")); //set view folder.
+console.log(path.join(__dirname,"Views"))
 
 
 // parse the req object

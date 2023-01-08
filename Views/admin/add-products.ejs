@@ -1,0 +1,34 @@
+<%- include("../includes/top.ejs") %>
+<%- include("../includes/nav") %>
+
+<form class="product-form" action=<%= edit?'/admin/edit_product':'/admin/add-product'%> method="POST" enctype='multipart/form-data'>
+    <% if(edit){%>
+        <input type="hidden" value=<%= product._id %> name="id">
+    <% } %>
+    <div class="form-control">
+        <h1 style="text-align: center;" class="<%=msgType %>"><%= errorMessage %></h1>
+        <label for="title">Title</label>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="text" name="title" id="title" value="<%= edit?product.title:obj?obj.title:''%>" class="<%= data.includes('title')?'invalid':'' %>">
+    </div>
+    <div class="form-control">
+        <!-- <label for="imageUrl">Image URL</label>
+        <input type="text" name="imageUrl" id="imageUrl" value="<%= edit?product.imageUrl:obj?obj.imageUrl:''%>" class="<%= data.includes('imageUrl')?'invalid':'' %>"> -->
+        <label for="image">Image <b>(Image should not exceed 500KB)</b></label>
+        <input type="file" name="image" id="image">
+    </div>
+    <div class="form-control">
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" step="0.01" value="<%= edit?product.price:obj?obj.price:''%>" class="<%= data.includes('price')?'invalid':'' %>">
+    </div>
+    <div class="form-control">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="5" class="<%= data.includes('description')?'invalid':'' %>"><%= edit?product.description:obj?obj.description:''%></textarea>
+    </div>
+
+    <button class="btn" type="submit"><%= edit?'Edit product':'Add product'%></button>
+</form>
+
+<%- include("../includes/bottom.ejs") %>
+
+

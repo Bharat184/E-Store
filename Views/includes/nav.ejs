@@ -1,0 +1,29 @@
+<nav class="active">
+
+    <ul>
+        <div>
+
+            <li><a href="/" class=<%=link==='/home' ?'active':''%>>Shop</a></li>
+            <li><a href="/products" class=<%=link==='/product' ?'active':''%>>Products</a></li>
+            <% if(isAuthenticated!=undefined) {%>
+                <li><a href="/cart" class=<%=link==='/cart' ?'active':''%>>Carts</a></li>
+                <li><a href="/orders" class=<%=link==='/orders' ?'active':''%>>Orders</a></li>
+                <li><a href="/admin/add-product" class=<%=link==='/add_product' ?'active':''%>>Add Product</a></li>
+                <li><a href="/admin/products" class=<%=link==='/a_product' ?'active':''%>>Admin Products</a></li>
+            <% } %>
+        </div>
+        <div>
+            <% if(isAuthenticated==undefined) {%>
+                <li><a href="/login" class=<%=link==='/login' ?'active':''%> >Login</a></li>
+                <li><a href="/signup" class=<%=link==='/signup' ?'active':''%> >Signup</a></li>
+                <% } else { %>
+                    <li><a href="/logout" class=<%=link==='/log' ?'active':''%> >Logout</a></li>
+                    <% } %>
+
+
+        </div>
+    </ul>
+
+
+    <i id="toggleBtn"></i>
+</nav>

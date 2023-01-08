@@ -1,0 +1,37 @@
+<%- include("../includes/top") %>
+ <%- include("../includes/nav") %>
+
+<div class="container">
+  <% if(product.length>0) { %> <% for(let e of product){%>
+  <article>
+    <h2><%= e.title %></h2>
+    <img src="/<%= e.imageUrl %>" alt="Book Image" />
+    <hr />
+    <h4>
+      Price: <span style="color: red; font-size: 20px">$<%= e.price %></span>
+    </h4>
+    <p><%= e.description %></p>
+    <div class="btns">
+      <form action="/admin/edit" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" name="id" value="<%= e._id %>" />
+        <button type="submit" class="btn">Edit</button>
+      </form>
+      <form >
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" name="id" value="<%= e._id %>" />
+        <button type="button" class="btn delete-product-btn" >Delete</button>
+      </form>
+    </div>
+  </article>
+  <% }} else { %>
+  <h1>No Products</h1>
+  <% } %>
+</div>
+<% if(product.length>=1) {%>
+  <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage:
+    nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage:
+    hasNextPage, hasPreviousPage: hasPreviousPage}) %> 
+<% } %>
+
+<%-include("../includes/bottom") %>

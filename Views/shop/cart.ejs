@@ -1,0 +1,35 @@
+<%- include("../includes/top") %>
+<%- include("../includes/nav") %>
+
+<div class="container">
+    <% if(data.length>0) { %>
+        <% for(let e of data) { %>
+            <div class="cart-item">
+                <img src=<%= e.productId.imageUrl %> alt="">
+                <hr>
+                <h2><%= e.productId.title %></h2>
+                <h4>Price: <span style="color:red;font-size: 20px;">$<%= e.productId.price %></span></h4>
+                <h4>Quantity: <%= e.quantity %></h4>
+                <p>Total: $<%= +e.productId.price * +e.quantity  %></p>
+                <form action="/cart/delete" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="hidden" name="id" value=<%= e.productId._id %>>
+                    <button type="submit" class="btn">Remove from cart</button>
+                </form>
+            </div>
+        <% } %>
+        <% } else { %>
+            <h2>Cart Empty</h2>
+            <% } %>
+   
+</div>
+<% if(data.length>0) { %>
+    <hr>
+    <form action="/checkout" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" id="checkout">Checkout</button>
+    </form>
+<% } %>
+
+
+<%- include("../includes/bottom") %>

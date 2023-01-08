@@ -1,0 +1,23 @@
+<%- include("../includes/top") %>
+<%- include("../includes/nav") %>
+
+
+   <form action="/signup" method="post" class="myform">
+    <h1 class="<%=msgType?msgType:'' %>"><%= errorMessage?errorMessage:'' %></h1>
+    <label>
+        Enter your name
+        <input type="text" name="name" id="" class="<%= data.includes('name')?'invalid':'' %>"
+        value="<%= obj?obj.name:''%>">
+    </label>
+    <label>
+        Enter your email
+        <input type="text" name="email" id=""  class="<%= data.includes('email')?'invalid':'' %>" value="<%= obj?obj.email:''%>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </label>
+    <label>
+        Enter your password
+        <input type="password" name="password" id=""  class="<%= data.includes('password')?'invalid':'' %>" value="<%= obj?obj.password:''%>">
+    </label>
+    <input type="submit" value="Sign Up">
+   </form>
+<%- include("../includes/bottom") %>

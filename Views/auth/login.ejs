@@ -1,0 +1,19 @@
+<%- include("../includes/top") %>
+<%- include("../includes/nav") %>
+
+
+   <form action="/login" method="post" class="myform">
+    <h1 class="<%=msgType %>"><%= errorMessage %></h1>
+    <label>
+        Enter your email
+        <input type="text" name="email" id="" >
+    </label>
+    <label>
+        Enter your password
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="password" name="password" id="" >
+    </label>
+    <input type="submit" value="Log in">
+    <a href="/reset">Reset password</a>
+   </form>
+<%- include("../includes/bottom") %>

@@ -1,0 +1,33 @@
+<%- include("../includes/top") %>
+<%- include("../includes/nav") %>
+
+<div class="container">
+  <% if (product.length>0) {%>
+    <% product.forEach((e)=>{%>
+        <article>
+            <img src="/<%= e.imageUrl %>" alt="<%= e.title %>">
+            <hr>
+            <h2><%= e.title %></h2>
+            <h4>Price: <span style="color:red;font-size: 20px;">$<%= e.price %></span></h4>
+            <p><%= e.description %></p>
+            <% if(isAuthenticated!=undefined) { %>
+            <div class="btns">
+                <form action="/add_to_cart" method="post">
+                    <input type="hidden" name="id" value="<%= e._id %>">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn">Add to cart</button>
+                </form>
+            </div>
+            <% } %>
+        </article>
+        <% })%>
+   <% }else{ %>
+    <h1>No Product Found!</h1>
+    <% } %>
+</div>
+
+<% if(product.length>0) { %>
+    <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+<% } %>
+
+<%- include("../includes/bottom") %>

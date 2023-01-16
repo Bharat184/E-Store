@@ -183,7 +183,7 @@ exports.delete_product = (req, res, next) => {
     product
         .findById(prodId)
         .then((product_doc) => {
-            filehelper.deleteFile(product_doc.imageUrl);
+            filehelper.deleteFile(path.join(__dirname,"../",product_doc.imageUrl));
             product.findByIdAndRemove(prodId).then((result) => {
                 res.json({success:true});
             });
@@ -235,7 +235,7 @@ exports.edit_product_data = (req, res, next) => {
                 product.price = updatedPrice;
                 product.description = updatedDesc;
                 if (image) {
-                    filehelper.deleteFile(product.imageUrl);
+                    filehelper.deleteFile(path.join(__dirname,"../",product.imageUrl));
                     product.imageUrl = image.path;
                 }
                 return product.save();
